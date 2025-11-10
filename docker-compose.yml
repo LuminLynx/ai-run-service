@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - AGENT_ENABLED=true
+    volumes:
+      - ./service:/app/service
+      - ./agent:/app/agent
+    command: uvicorn service.main:app --host 0.0.0.0 --port 8000 --reload
